@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Something went wrong.Try to restart your app.",
+                                "Ups..Something went wrong...Check your internet connection or restart your app.",
                                 Toast.LENGTH_LONG).show();
                     }
                 });
