@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
 
         try{
-            Thread.sleep(1400);
+            Thread.sleep(1100);
         } catch(InterruptedException e){
             e.printStackTrace();
         }
