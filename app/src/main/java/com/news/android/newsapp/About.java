@@ -44,8 +44,8 @@ public class About extends AppCompatActivity {
         }else { myDescTextView.setText(description); }
 
         //setting photo
-        if(photo.equals("null")){
-            myImageView.setImageDrawable(getDrawable(R.drawable.goat));
+        if((photo.equals("null")) || (photo.equals(""))        ){
+            myImageView.setImageDrawable(getDrawable(R.drawable.download));
         }
         else {
             Picasso.get().load(photo).into(myImageView);

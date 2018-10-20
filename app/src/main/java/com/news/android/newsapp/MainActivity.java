@@ -32,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        setTheme(R.style.AppTheme);
+
+        try{
+            Thread.sleep(1400);
+        } catch(InterruptedException e){
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -50,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     //getting JSON objects by index
                     byIndex = article.getJSONObject(index);
+                    //using index to fetch data
                     aboutTitle = byIndex.getString("title");
                     aboutDescription = byIndex.getString("description");
                     aboutPhoto = byIndex.getString("urlToImage");
@@ -65,14 +75,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
-}
+        }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     private class GetTitles extends AsyncTask<Void, Void, Void> {
 
         @Override
         //Loading app before you say cookie
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(MainActivity.this,"Say cookie.",Toast.LENGTH_LONG).show();
+
         }
 
         @Override
@@ -82,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
             // Making a request to url and getting response
             String url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=e402c76fc8584a1c81849179f1277a74";
             //.........connection.........
-            String jsonStr = urlConn.makeServiceCall(url);
+            String response = urlConn.makeServiceCall(url);
 
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
+            Log.e(TAG, "Response from url: " + response);
+            if (response != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(response);
 
                     // Getting JSON Array node
                     article = jsonObj.getJSONArray("articles");
@@ -98,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject c = article.getJSONObject(i);
                         header = c.getString("title");
 
-                        // tmp hash map for single contact
+                        // news hash map
                         HashMap<String, String> news = new HashMap<>();
                         // adding each child node to HashMap key => value
                         news.put("naslov", header);
@@ -138,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(result);
             ListAdapter adapter = new SimpleAdapter(MainActivity.this, titleList, R.layout.list_item, new String[]{ "naslov"}, new int[]{R.id.title});
             lv.setAdapter(adapter);
+            Toast.makeText(MainActivity.this,"Your news are ready.",Toast.LENGTH_LONG).show();
         }
 }
 

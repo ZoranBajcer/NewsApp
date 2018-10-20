@@ -18,12 +18,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:scaleType="fitXY"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="280dp"
-            android:paddingTop="4dp"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:layout_marginBottom="5dp"
             />
 
